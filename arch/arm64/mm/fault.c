@@ -419,7 +419,6 @@ static int __kprobes do_page_fault(unsigned long addr, unsigned int esr,
 	unsigned int mm_flags = FAULT_FLAG_ALLOW_RETRY | FAULT_FLAG_KILLABLE | FAULT_FLAG_DEFAULT;
 	bool was_major = false;
 	unsigned long event_ts = jiffies;
-	struct vm_area_struct *vma = NULL;
 
 	if (notify_page_fault(regs, esr))
 		return 0;
@@ -491,12 +490,7 @@ retry:
 	}
 
 	if (fault & VM_FAULT_RETRY) {
-		/*
-		 * Clear FAULT_FLAG_ALLOW_RETRY to avoid any risk of
-		 * starvation.
-		 */
 		if (mm_flags & FAULT_FLAG_ALLOW_RETRY) {
-			mm_flags &= ~FAULT_FLAG_ALLOW_RETRY;
 			mm_flags |= FAULT_FLAG_TRIED;
 			goto retry;
 		}
