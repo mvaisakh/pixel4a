@@ -12,7 +12,7 @@ SECTIONS {
 		*(.eh_frame)
 	}
 
-	.bss : { *(.bss .bss.[0-9a-zA-Z_]*) }
+	.bss : { *(.bss .bss.[0-9a-zA-Z_]*) *(.bss..L*) }
 	.data : { *(.data .data.[0-9a-zA-Z_]*) }
 	.rela.data : { *(.rela.data .rela.data.[0-9a-zA-Z_]*) }
 	.rela.rodata : { *(.rela.rodata .rela.rodata.[0-9a-zA-Z_]*) }
