@@ -37,6 +37,32 @@ load(
     "get_kunit_modules_list",
 )
 
+load("//build/kernel/kleaf:kernel.bzl", "kernel_build", "kernel_images")
+
+kernel_build(
+    name = "sunfish",
+    # Path to your defconfig file
+    defconfig = "arch/arm64/configs/sunfish_defconfig",
+    # Path to any extra fragment configs (optional)
+    defconfig_fragments = [],
+    # Overlay device tree sources for sunfish
+    dtb = [
+        "arch/arm64/boot/dts/qcom/sm7150-google-sunfish.dts",
+    ],
+    outs = [
+        "arch/arm64/boot/Image",
+        "arch/arm64/boot/dts/qcom/sm7150-google-sunfish.dtb",
+    ],
+    build_out_dir = "out/sunfish",
+)
+
+kernel_images(
+    name = "kernel_aarch64_sunfish_dist",
+    build_target = ":sunfish",
+    kernel_modules_install = ":sunfish_modules_install",
+    visibility = ["//visibility:public"],
+)
+
 package(
     default_visibility = [
         "//visibility:public",
