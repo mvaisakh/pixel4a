@@ -449,7 +449,14 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common -fshort-wchar \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
-		   -std=gnu89
+		   -std=gnu89 \
+		   -O3 \
+		   -march=armv8.2-a+crypto+crc \
+		   -mtune=cortex-a76 \
+		   -mfloat-abi=hard \
+		   -mfpu=crypto-neon-fp-armv8 \
+		   -funsafe-math-optimizations
+
 ifeq ($(TARGET_BOARD_TYPE),auto)
 KBUILD_CFLAGS    += -DCONFIG_PLATFORM_AUTO
 endif
