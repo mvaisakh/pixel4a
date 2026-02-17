@@ -730,6 +730,7 @@ KBUILD_CFLAGS	+= $(call cc-disable-warning, format)
 KBUILD_CFLAGS	+= $(call cc-disable-warning, address)
 KBUILD_CFLAGS	+= $(call cc-disable-warning, duplicate-decl-specifier)
 KBUILD_CFLAGS	+= $(call cc-disable-warning, enum-int-mismatch)
+KBUILD_CFLAGS	+= $(call cc-disable-warning, unused-result)
 
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS   += -Os
