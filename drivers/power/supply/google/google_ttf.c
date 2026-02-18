@@ -639,7 +639,7 @@ static int ttf_tier_sscan(struct batt_ttf_stats *stats,
 			  const char *buff,
 			  size_t size)
 {
-	int i, j, t, cnt, len = 0;
+	int i = 0, j, t, cnt, len = 0;
 
 	memset(&stats->tier_stats, 0, sizeof(*stats));
 
