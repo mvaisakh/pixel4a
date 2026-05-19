@@ -95,8 +95,12 @@ KBUILD_CFLAGS	+= -mgeneral-regs-only $(lseinstr) $(brokengasinst) $(vdso32)
 KBUILD_CFLAGS	+= -fno-asynchronous-unwind-tables
 KBUILD_CFLAGS	+= $(call cc-option, -mpc-relative-literal-loads)
 KBUILD_CFLAGS	+= -fno-pic
-KBUILD_CFLAGS	+= -mcpu=kryo -march=armv8.2-a+dotprod+crypto -mtune=cortex-a76
 KBUILD_AFLAGS	+= $(lseinstr) $(brokengasinst) $(vdso32)
+ifeq ($(cc-name),clang)
+  KBUILD_CFLAGS	+= -mcpu=kryo -march=armv8.2-a+dotprod+crypto -mtune=cortex-a76
+else
+  KBUILD_CFLAGS	+= -mcpu=cortex-a76+dotprod+crypto
+endif
 
 KBUILD_CFLAGS	+= $(call cc-option,-mabi=lp64)
 KBUILD_AFLAGS	+= $(call cc-option,-mabi=lp64)
